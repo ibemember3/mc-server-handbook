@@ -59,8 +59,9 @@ Many solutions have been created (and often for a heavy price) to provide protec
 + TCPShield: Uses OVHCloud's DDoS prevention + custom rules. Free up to 1TB of bandwidth a month. $25 USD for 2.5TB a month. $100/$250 USD a month for unlimited bandwidth.
 + Cloudflare Spectrum: Uses Cloudflare's **excellent** systems (they secure 19.4% of all websites). **EXPENSIVE** with $1000 USD for 1TB.
 + MCShield: Uses Cloudflare Spectrum. $10 USD a month. Not suitable for servers outside of a friend group, as you cannot use your own domain.
-+ Lectron: Uses Cloudflare and Path.net. $33.33 USD for 1TB.
++ Lectron: Uses Cloudflare Spectrum and Path.net. $33.33 USD for 1TB.
 + CosmicGuard: Custom solution. Weird, opaque pricing - $0.03 average per player daily (???)
++ PlayIt.gg: Custom solution - bit rudimentary. Free. If you want your dedicated IP and wish to avoid SRV records, $10 USD a month ($100 USD a year).
 
 [Further Reading](https://github.com/BlockhostOfficial/ddos-prot-mc-servers "Further Reading")
 
@@ -86,3 +87,26 @@ While using internal, back-end game panels can make your less technically-savvy 
 
 Keep **up-to-date** on server news and updates on your server software. The infamous Log4j exploit in 2021 was one of the most dangerous, allowing unprecedented remote code execution on nearly all Minecraft clients and servers. Many Minecraft servers are still vulnerable today as a result of them not being updated. **Update your servers.**
 
+### Indirect Vulnerabilities
+
+Even if your server is secured very well, it is only as secure as you. If you use DiscordSRV and link a #console channel in your Discord server, a hacker can target your Discord account instead to gain access to your Minecraft server. Use **2FA** and **strong passwords** on all your other accounts. 
+
+This also applies to people you hire to help with your server.
+
+## Aikar's Flags
+
+Java Virtual Machine (JVM) Garbage Collection can negatively impact Minecraft servers. Memory can often get cleaned up at incorrect times, improperly utilised for Minecraft servers, and other issues lead to a degraded Minecraft server.
+
+Aikar, a developer within the Minecraft server scene, has extensively researched JVM factors affecting the performance of Minecraft servers and has designed two sets of flags to launch a server with to maximise performance.
+
+1-12GB RAM:
+
+` -Xms**RAM**G -Xmx**RAM**G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true`
+
+12GB+ RAM:
+
+` -Xms**RAM**G -Xmx**RAM**G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true`
+
+Replace `**RAM**` with the amount of RAM you wish to allocate to your Minecraft server.
+
+[Further Reading](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/ "Further Reading")

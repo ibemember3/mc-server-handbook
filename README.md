@@ -89,7 +89,7 @@ Keep **up-to-date** on server news and updates on your server software. The infa
 
 ### Indirect Vulnerabilities
 
-Even if your server is secured very well, it is only as secure as you. If you use DiscordSRV and link a #console channel in your Discord server, a hacker can target your Discord account instead to gain access to your Minecraft server. Use **2FA** and **strong passwords** on all your other accounts. 
+Even if your server is secured very well, it is only as secure as you. If you use DiscordSRV and link a #console channel in your Discord server, a hacker can target your Discord account instead to gain access to your Minecraft server. Use **2FA** and **strong passwords** on all your other accounts.
 
 This also applies to people you hire to help with your server.
 
@@ -110,3 +110,11 @@ Aikar, a developer within the Minecraft server scene, has extensively researched
 Replace `**RAM**` with the amount of RAM you wish to allocate to your Minecraft server.
 
 [Further Reading](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/ "Further Reading")
+
+## Dynamic Maps
+
+Some, often small survival, Minecraft servers offer a web map that allows people to view and sometimes chat with the Minecraft server. However, setting one up securely and properly requires more technical configuration.
+
+Many web maps do not provide HTTPS, which therefore requires a reverse proxy such as NGINX to provide the security needed (and other benefits). Directly exposing a port to the internet can be a dangerous gamble (and will not work if you're doing a "homemade" DDoS protection method described earlier), so using a tunnel such as Cloudflare Tunnel can be an excellent, safe way to expose a service.
+
+Web maps also use a lot of storage, so it is a good idea to lower default rendering resolutions in their configuration files. A database is also good if the web map supports it.
